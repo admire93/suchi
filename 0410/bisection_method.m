@@ -12,18 +12,12 @@ function [r, stop_i] = bisection_method(x1, x2, fname)
     end
 
     x3 = (x1 + x2) / 2;
-    flag = feval(fname, x1) * feval(fname, x3);
-    rel_error = (abs(x3 - x3old) / x3) * 100;
 
-    if i ~= 1 && rel_error < 0.005
+    if i ~=1 && rel_error(x3, x3old, 0.005)
       break;
     end
 
-    if flag < 0
-      x2 = x3;
-    else
-      x1 = x3;
-    end
+    [x1, x2] = choice_x(x1, x2, x3, fname);
     x3old = x3;
   end
 

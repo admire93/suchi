@@ -1,4 +1,4 @@
-function r = newton_raphson(x, fname, f_primename)
+function [r, stop_i] = newton_raphson(x, fname, f_primename)
   old = x;
   new = x;
   for i=1:1000

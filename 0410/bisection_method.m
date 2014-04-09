@@ -13,7 +13,7 @@ function [r, stop_i] = bisection_method(x1, x2, fname)
 
     x3 = (x1 + x2) / 2;
 
-    if i ~=1 && rel_error(x3, x3old, 0.005)
+    if i ~=1 && rel_error(x3, x3old, 0.0001)
       break;
     end
 

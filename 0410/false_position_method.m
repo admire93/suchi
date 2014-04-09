@@ -11,7 +11,12 @@ function [r, stop_i] = false_position_method(x1, x2, fname)
       break;
     end
 
-    x3 = ((y2 - y1) / (x2 - x1)) * -x1 + y1;
+    yquan = y2 - y1;
+    if yquan == 0
+      printf("f(x2) - f(x1) 의 값이 0 이되었습니다.");
+      break;
+    end
+    x3 = x2 - y2 * (x2 - x1) / yquan;
 
     if i ~=1 && rel_error(x3, x3old, 0.005)
       break;

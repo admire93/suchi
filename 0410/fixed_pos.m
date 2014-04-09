@@ -12,5 +12,5 @@ function r = fixed_pos(x, fname)
   end
 
   stop_i = i;
-  r = x3;
+  r = old;
 end

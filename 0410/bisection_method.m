@@ -15,7 +15,7 @@ function [r, stop_i] = bisection_method(x1, x2, fname)
     flag = feval(fname, x1) * feval(fname, x3);
     rel_error = (abs(x3 - x3old) / x3) * 100;
 
-    if rel_error < 0.005
+    if i ~= 1 && rel_error < 0.005
       break;
     end
 

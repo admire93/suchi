@@ -1,6 +1,5 @@
-function r = spline(x, y, idx, x0)
-  % x(idx) < x0 < x(idx+1) 인 idx와 x0를 구해야함
-  % 정렬해서 구하면 되지만 그냥 입력하는걸로...
+function r = spline(x, y, x0)
+
   xsize = length(x);
   hsize = xsize - 1;
   Asize = xsize - 2;
@@ -29,13 +28,21 @@ function r = spline(x, y, idx, x0)
   Sr = rref(A);
   s = [0 Sr(:, acol_1)' 0];
 
-  R(1) = (s(idx + 1) - s(idx)) / (6 * h(idx));
-  R(2) = s(idx) / 2;
-  r31 = (y(idx + 1) - y(idx)) / h(idx);
-  r32 = ( (s(idx + 1) - s(idx)) / 6 ) * h(idx);
-  r33 = ( s(idx) / 2 ) * h(idx);
-  R(3) = r31 - r32 - r33;
-  R(4) = y(idx);
+  for i=1:hsize
+    p(i, 1) = (s(i + 1) - s(i)) / (6 * h(i));
+    p(i, 2) = s(i) / 2;
+    r31 = (y(i + 1) - y(i)) / h(i);
+    r32 = ( (s(i + 1) - s(i)) / 6 ) * h(i);
+    r33 = ( s(i) / 2 ) * h(i);
+    p(i, 3) = r31 - r32 - r33;
+    p(i, 4) = y(i);
+  end
 
-  r = polyval(R, x0 - x(idx));
+  for i=2:hsize
+    if x(i) > x0
+      break;
+    end
+  end
+
+  r = polyval(p(i - 1, :), x0 - x(i - 1));
 end

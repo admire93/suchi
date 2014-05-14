@@ -8,7 +8,7 @@ function out = simpson38(x, y)
   r2 = 0;
   r3 = 0;
   for i=2:(lx - 1)
-    if rem(i, 4) == 0
+    if rem(i, 3) == 1
       r2 += y(i);
     else
       r3 += y(i);
@@ -16,5 +16,5 @@ function out = simpson38(x, y)
   end
 
   h = x(2) - x(1);
-  out = (h / 3) * (3 * r3 + 2 * r2 + y(1) + y(lx));
+  out = ((3 * h) / 8) * (3 * r3 + 2 * r2 + y(1) + y(lx));
 end
